@@ -5,6 +5,7 @@
 
 - `kind create cluster`
 - `istioctl manifest apply --set profile=demo`
+- `helm install seldon-core ../../seldon-core/helm-charts/seldon-core-operator/ --namespace seldon-system --set istio.enabled=true`
 
 - Install the seldon core protobufs `pip install seldon-core[tensorflow]`
 
