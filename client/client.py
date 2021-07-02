@@ -4,6 +4,7 @@ import tensorflow as tf
 from tensorflow.core.framework import types_pb2
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2_grpc
+import time
 
 channel = grpc.insecure_channel('localhost:8004')
 stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)
@@ -24,9 +25,12 @@ request.inputs['dense_14_input'].CopyFrom(tf.make_tensor_proto(ft, dtype=types_p
 
 metadata = [("seldon", "credit-fraud"), ("namespace", "seldon")]
 
-for _ in range(5000):
+t = time.time()
+for _ in range(200):
     result = stub.Predict(request, 1, metadata=metadata)
-    print(result)
+    #print(result)
+
+print("latency: ", time.time() - t)
 
 
 

@@ -1,0 +1,49 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: credit-fraud
+  namespace: seldon
+spec:
+  protocol: tensorflow
+  name: credit-fraud
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - env:
+          - name: TRACING
+            value: '1'
+          - name: JAEGER_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: JAEGER_AGENT_PORT
+            value: '5775'
+          - name: JAEGER_SAMPLER_TYPE
+            value: const
+          - name: JAEGER_SAMPLER_PARAM
+            value: '1'
+          image: tensorflow/serving
+          name: model1
+        terminationGracePeriodSeconds: 1
+
+    graph:
+      implementation: TENSORFLOW_SERVER
+      modelUri: gs://rfdickerson-credit-fraud-model/credit-fraud
+      name: classifier
+    name: default
+    replicas: 4
+    svcOrchSpec:
+      env:
+      - name: TRACING
+        value: '1'
+      - name: JAEGER_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            fieldPath: status.hostIP
+      - name: JAEGER_AGENT_PORT
+        value: '5775'
+      - name: JAEGER_SAMPLER_TYPE
+        value: const
+      - name: JAEGER_SAMPLER_PARAM
+        value: '1'
