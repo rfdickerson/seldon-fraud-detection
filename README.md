@@ -1,2 +1,23 @@
-# seldon-fraud-detection
-Seldon toy project
+# Credit Card Fraud Detection
+> Seldon toy project
+
+## Setup
+
+- `kind create cluster`
+- `istioctl manifest apply --set profile=demo`
+- `helm install seldon-core ../../seldon-core/helm-charts/seldon-core-operator/ --namespace seldon-system --set istio.enabled=true`
+
+- Install the seldon core protobufs `pip install seldon-core[tensorflow]`
+
+## Deploy model
+
+- `kubectl create namespace seldon`
+- `kubectl apply -f credit-card-model.yaml`
+
+## Client call
+
+- `python client/credit-client.py`
+
+
+
+
