@@ -26,7 +26,7 @@ request.inputs['dense_14_input'].CopyFrom(tf.make_tensor_proto(ft, dtype=types_p
 metadata = [("seldon", "credit-fraud"), ("namespace", "seldon")]
 
 t = time.time()
-for _ in range(200):
+for _ in range(2000):
     result = stub.Predict(request, 1, metadata=metadata)
     #print(result)
 

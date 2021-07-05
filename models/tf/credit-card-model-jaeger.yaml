@@ -25,6 +25,19 @@ spec:
             value: '1'
           image: tensorflow/serving
           name: model1
+          args:
+          - --model_name=credit-fraud
+          - --model_base_path=gs://rfdickerson-credit-fraud-model/credit-fraud
+          - --enable_batching
+          command: 
+          - /usr/bin/tensorflow_model_server
+          resources:
+            limits:
+              cpu: "4"
+              memory: 4Gi
+            requests:
+              cpu: "2"
+              memory: 1Gi
         terminationGracePeriodSeconds: 1
 
     graph:
@@ -32,7 +45,7 @@ spec:
       modelUri: gs://rfdickerson-credit-fraud-model/credit-fraud
       name: classifier
     name: default
-    replicas: 4
+    replicas: 1
     svcOrchSpec:
       env:
       - name: TRACING
