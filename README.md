@@ -44,5 +44,10 @@ kubectl port-forward $(kubectl get pods -l istio=ingressgateway -n istio-system 
 - `python client/credit-client.py`
 
 
+## Notebook
+
+Based on this Kaggle project:
+
+https://www.kaggle.com/rfdickerson/credit-card-fraud-detection-anns-vs-xgboost
 
 
