@@ -1,0 +1,10 @@
+  # - componentSpecs:
+  #   - spec:
+  #       containers:
+  #       - name: model2
+  #         image: nvcr.io/nvidia/tritonserver:21.05-py3
+  #         imagePullPolicy: IfNotPresent
+  #         args:
+  #         - --model-repository=/models
+  #         command: 
+  #         - tritonserver
