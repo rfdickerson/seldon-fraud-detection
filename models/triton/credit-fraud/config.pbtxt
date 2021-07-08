@@ -1,0 +1,20 @@
+name: "credit-fraud"
+platform: "tensorflow_savedmodel"
+
+max_batch_size: 8
+
+input [
+    {
+        name: "dense_14_input"
+        data_type: TYPE_FP32
+        dims: [ 29 ]
+    }
+]
+output [
+    {
+        name: "dense_15"
+        data_type: TYPE_FP32
+        dims: [ 1 ]
+    }
+]
+

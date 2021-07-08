@@ -1,0 +1,15 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: credit-fraud
+  namespace: seldon
+spec:
+  protocol: kfserving
+  name: credit-fraud
+  predictors:
+  - graph:
+      implementation: TRITON_SERVER
+      modelUri: gs://rfdickerson-credit-fraud-model/triton2
+      name: classifier
+    name: default
+    replicas: 1
